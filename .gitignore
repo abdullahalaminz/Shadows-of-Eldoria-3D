@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local save records (optional, keeps repository clean)
+savegame.json
+hall_of_fame.json
