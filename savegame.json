@@ -1,0 +1,32 @@
+{
+    "timestamp": "2026-11-09 12:56:56",
+    "floor": 1,
+    "player": {
+        "name": "Abdullah",
+        "player_class": "Warrior",
+        "hp": 130,
+        "max_hp": 130,
+        "mp": 40,
+        "max_mp": 40,
+        "base_atk": 14,
+        "base_def": 8,
+        "speed": 8,
+        "gold": 30,
+        "level": 1,
+        "xp": 0,
+        "equipped_weapon": "rusty_sword",
+        "equipped_armor": "leather_armor",
+        "inventory": {
+            "minor_healing_potion": 2,
+            "stoneskin_tonic": 1
+        },
+        "skills": [
+            "shield_slam",
+            "iron_tempest",
+            "war_cry"
+        ],
+        "battles_won": 0,
+        "chests_opened": 0,
+        "bosses_defeated": 0
+    }
+}

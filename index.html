@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Shadows of Eldoria 3D - The Sunken Crypt</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js (Local with CDN fallback) -->
+  <script src="three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
+</head>
+<body>
+  <!-- 3D Canvas Container -->
+  <div id="game-container"></div>
+
+  <!-- HUD Overlay -->
+  <div id="hud">
+    <!-- Player Status Bars -->
+    <div id="status-panel">
+      <div class="bar-container">
+        <span class="bar-label">HP</span>
+        <div class="bar-track">
+          <div id="hp-bar" class="bar-fill hp-fill" style="width: 100%;"></div>
+        </div>
+        <span id="hp-text" class="bar-value">100 / 100</span>
+      </div>
+
+      <div class="bar-container">
+        <span class="bar-label">MP</span>
+        <div class="bar-track">
+          <div id="mp-bar" class="bar-fill mp-fill" style="width: 100%;"></div>
+        </div>
+        <span id="mp-text" class="bar-value">60 / 60</span>
+      </div>
+
+      <div class="bar-container">
+        <span class="bar-label">XP</span>
+        <div class="bar-track">
+          <div id="xp-bar" class="bar-fill xp-fill" style="width: 0%;"></div>
+        </div>
+        <span id="xp-text" class="bar-value">LVL 1</span>
+      </div>
+    </div>
+
+    <!-- Gold & Floor Info -->
+    <div id="stats-panel">
+      <div id="floor-badge">🏰 Floor 1: Crypt Entrance</div>
+      <div id="gold-badge">🪙 Gold: <span id="gold-value">0</span></div>
+      <div id="slain-badge">💀 Slain: <span id="slain-value">0</span></div>
+    </div>
+
+    <!-- Minimap -->
+    <div id="minimap-container">
+      <canvas id="minimap" width="140" height="140"></canvas>
+    </div>
+
+    <!-- Crosshair -->
+    <div id="crosshair">
+      <div class="crosshair-dot"></div>
+    </div>
+
+    <!-- Prompt / Interaction Toast -->
+    <div id="interaction-prompt"></div>
+
+    <!-- Quick Action Hotbar -->
+    <div id="hotbar">
+      <div class="hotbar-slot active" id="slot-1" title="Sword Slash (Left Click)">
+        <span class="slot-key">LMB</span>
+        <span class="slot-name">🗡️ Strike</span>
+      </div>
+      <div class="hotbar-slot" id="slot-2" title="Cast Fireball (Right Click or E)">
+        <span class="slot-key">RMB / E</span>
+        <span class="slot-name">🔥 Fireball (15 MP)</span>
+      </div>
+      <div class="hotbar-slot" id="slot-3" title="Health Potion (Q)">
+        <span class="slot-key">Q</span>
+        <span class="slot-name">🧪 Potion (<span id="potion-count">2</span>)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Damage Screen Flash -->
+  <div id="damage-flash"></div>
+
+  <!-- Start / Pause Screen -->
+  <div id="blocker">
+    <div id="instructions">
+      <h1 class="game-title">⚔️ SHADOWS OF ELDORIA 3D ⚔️</h1>
+      <p class="subtitle">The Sunken Crypt - First-Person Action Adventure</p>
+
+      <div class="controls-card">
+        <h3>🕹️ Controls</h3>
+        <ul>
+          <li><strong>W, A, S, D</strong> — Move around</li>
+          <li><strong>Mouse</strong> — Look around (Pointer Lock)</li>
+          <li><strong>Left Click</strong> — Slash Sword</li>
+          <li><strong>Right Click / E</strong> — Cast Fireball (Homing explosion)</li>
+          <li><strong>Space</strong> — Jump</li>
+          <li><strong>Q</strong> — Drink Health Potion</li>
+          <li><strong>F</strong> — Open Chests / Interact</li>
+        </ul>
+      </div>
+
+      <button id="start-btn" class="glow-button">ENTER THE CRYPT (CLICK TO PLAY)</button>
+      <p class="tip-text">Click screen anytime to lock mouse cursor. Press ESC to pause.</p>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="game-over-screen" class="modal-screen hidden">
+    <div class="modal-card">
+      <h2 class="game-over-title">💀 YOU DIED 💀</h2>
+      <p>The ancient darkness claimed your soul in the crypt depths.</p>
+      <div class="end-stats">
+        <p>Monsters Slain: <span id="end-slain">0</span></p>
+        <p>Gold Amassed: <span id="end-gold">0</span></p>
+      </div>
+      <button id="restart-btn" class="glow-button">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Victory Screen -->
+  <div id="victory-screen" class="modal-screen hidden">
+    <div class="modal-card victory-card">
+      <h2 class="victory-title">👑 DUNGEON CONQUERED! 👑</h2>
+      <p>You vanquished Lord Morzan and banished the Void from Eldoria!</p>
+      <div class="end-stats">
+        <p>Total Slain: <span id="win-slain">0</span></p>
+        <p>Total Gold: <span id="win-gold">0</span></p>
+      </div>
+      <button id="win-btn" class="glow-button">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <script src="audio.js"></script>
+  <script src="game3d.js"></script>
+</body>
+</html>
